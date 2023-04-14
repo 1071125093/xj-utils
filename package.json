@@ -5,12 +5,24 @@
   "main": "index.ts",
   "scripts": {
     "docs:dev": "vitepress dev docs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:eslint": "eslint --cache --max-warnings 10086  \"src/**/*.{vue,ts,tsx}\" --fix",
+    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint": "npm run lint:prettier && npm run lint:eslint",
+    "lint:tsc": "vue-tsc --noEmit",
+    "postinstall": "npx simple-git-hooks"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vitepress": "1.0.0-alpha.65"
+    "vitepress": "1.0.0-alpha.65",
+    "simple-git-hooks": "^2.8.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,vue,md}": []
   }
 }
